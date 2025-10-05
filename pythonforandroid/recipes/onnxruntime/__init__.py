@@ -11,7 +11,7 @@ class OnnxRuntimeRecipe(PyProjectRecipe):
     depends = ["setuptools", "wheel", "numpy", "protobuf", "pybind11"]
     patches = [
         'patches/onnx_numpy.patch',
-        'patches/mlasi_bfloat.patch',
+        #'patches/mlasi_bfloat.patch',
     ]
     build_in_src = True
 
