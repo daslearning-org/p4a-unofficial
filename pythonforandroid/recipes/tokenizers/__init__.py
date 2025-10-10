@@ -15,7 +15,7 @@ class TokenizersRecipe(RustCompiledComponentsRecipe):
     def build_arch(self, arch):
         build_dir = self.get_build_dir(arch.arch)
         print(f"Build dir: {build_dir}")
-        tmp_tokenizer_dir = os.path.join(build_dir, "..", "temp_toneknizer")
+        tmp_tokenizer_dir = os.path.abspath(os.path.join(build_dir, "..", "temp_toneknizer"))
         python_dir = os.path.join(build_dir, 'bindings', 'python')
         shutil.copytree(python_dir, tmp_tokenizer_dir, dirs_exist_ok=True) # copy to temp dir
         shutil.rmtree(build_dir)  # Clean the default build directory
