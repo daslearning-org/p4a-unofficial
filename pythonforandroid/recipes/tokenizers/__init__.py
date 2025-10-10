@@ -12,23 +12,20 @@ class TokenizersRecipe(RustCompiledComponentsRecipe):
         'patches/pyproject.patch',
     ]
 
-    def get_build_dir(self, arch):
-        # Use the default build directory (e.g., .../other_builds/tokenizers/arm64-v8a__ndk_target_28/tokenizers)
-        build_dir = super().get_build_dir(arch)
-        # The bindings/python directory will be inside the extracted source
-        src_dir = super().get_recipe_dir()  # Root of the extracted tarball
-        python_dir = os.path.join(src_dir, 'bindings', 'python')
-        
-        # Ensure the build directory contains only the contents of bindings/python
-        if os.path.exists(build_dir):
-            shutil.rmtree(build_dir)  # Clean the default build directory
-        shutil.copytree(python_dir, build_dir, dirs_exist_ok=True)
-        
+    def build_arch(self, arch):
+        build_dir = self.get_build_dir(arch.arch)
+        print(f"Build dir: {build_dir}")
+        tmp_tokenizer_dir = os.path.join(build_dir, "..", "temp_toneknizer")
+        python_dir = os.path.join(build_dir, 'bindings', 'python')
+        shutil.copytree(python_dir, tmp_tokenizer_dir, dirs_exist_ok=True) # copy to temp dir
+        shutil.rmtree(build_dir)  # Clean the default build directory
+        shutil.copytree(tmp_tokenizer_dir, build_dir, dirs_exist_ok=True) # copy back only the python bindings folder
+        shutil.rmtree(tmp_tokenizer_dir) # remove temp dir
         # Verify that pyproject.toml exists in the build directory
         if not os.path.exists(os.path.join(build_dir, 'pyproject.toml')):
-            self.logger.error(f"pyproject.toml not found in {build_dir}")
+            print(f"pyproject.toml not found in {build_dir}")
             raise FileNotFoundError(f"pyproject.toml not found in {build_dir}")
-        
-        return build_dir
+        # trigger the main build
+        super().build_arch(arch)
 
 recipe = TokenizersRecipe()
