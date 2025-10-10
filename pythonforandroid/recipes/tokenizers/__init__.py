@@ -10,14 +10,18 @@ class TokenizersRecipe(RustCompiledComponentsRecipe):
     depends = []  # No dependencies since we're skipping huggingface_hub
     patches = [
         'patches/pyproject.patch',
+        'patches/cargo.patch'
     ]
 
     def build_arch(self, arch):
         build_dir = self.get_build_dir(arch.arch)
         print(f"Build dir: {build_dir}")
         tmp_tokenizer_dir = os.path.abspath(os.path.join(build_dir, "..", "temp_toneknizer"))
+        tmp_tokenizer_dir_base = os.path.join(tmp_tokenizer_dir, "tokenizers")
         python_dir = os.path.join(build_dir, 'bindings', 'python')
-        shutil.copytree(python_dir, tmp_tokenizer_dir, dirs_exist_ok=True) # copy to temp dir
+        base_tokenizers = os.path.join(build_dir, 'tokenizers')
+        shutil.copytree(python_dir, tmp_tokenizer_dir, dirs_exist_ok=True) # copy python binding to temp dir
+        shutil.copytree(base_tokenizers, tmp_tokenizer_dir_base, dirs_exist_ok=True) # copy the tokenizers base
         shutil.rmtree(build_dir)  # Clean the default build directory
         shutil.copytree(tmp_tokenizer_dir, build_dir, dirs_exist_ok=True) # copy back only the python bindings folder
         shutil.rmtree(tmp_tokenizer_dir) # remove temp dir
