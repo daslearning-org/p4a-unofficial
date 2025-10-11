@@ -6,10 +6,12 @@ class TransformersRecipe(PyProjectRecipe):
 
     # Dependencies to include (excluding huggingface_hub, safetensors, tokenizers, etc.)
     # These are pulled from install_requires; add more if needed for your use case
-    depends = ['filelock', 'numpy', 'packaging', 'pyyaml', 'regex', 'requests']
+    depends = ['filelock', 'packaging', 'pyyaml', 'regex', 'requests']
 
     # If you need to patch the source to remove excluded dep references, list patch files here
-    # patches = ['path/to/your_patch.diff']
+    patches = [
+        'patches/init.patch',
+    ]
 
     # Optional: site-packages name if different
     site_packages_name = 'transformers'
