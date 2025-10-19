@@ -1317,7 +1317,7 @@ class PyProjectRecipe(PythonRecipe):
         )
         self.patch_shebangs(self._host_recipe.site_bin, self.real_hostpython_location)
 
-        env = self.get_recipe_env(arch, with_flags_in_cc=True)
+        env = self.get_recipe_env(arch) #, with_flags_in_cc=True
         # make build dir separately
         sub_build_dir = join(build_dir, "p4a_android_build")
         ensure_dir(sub_build_dir)
