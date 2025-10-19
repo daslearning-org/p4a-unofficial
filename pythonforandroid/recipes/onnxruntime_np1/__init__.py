@@ -6,9 +6,10 @@ from multiprocessing import cpu_count
 
 class OnnxRuntimeRecipe(PyProjectRecipe):
     version = "1.22.1"
+    site_packages_name = 'onnxruntime'
     url = "https://github.com/microsoft/onnxruntime/archive/refs/tags/v{version}.tar.gz"
 
-    depends = ["setuptools", "wheel", "numpy", "protobuf", "pybind11"]
+    depends = ["setuptools", "wheel", "numpy1", "protobuf", "pybind11"]
     patches = [
         'patches/onnx_numpy.patch',
         'patches/mlasi_bfloat.patch',
