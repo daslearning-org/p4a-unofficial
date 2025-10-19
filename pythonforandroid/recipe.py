@@ -1033,7 +1033,7 @@ class PythonRecipe(Recipe):
             else:
                 warning("`PythonRecipe.install_python_package` called without `setup.py` file!")
 
-    def get_hostrecipe_env(self, arch=None):
+    def get_hostrecipe_env(self): #, arch=None
         env = environ.copy()
         _python_path = self._host_recipe.get_path_to_python()
         libdir = glob.glob(join(_python_path, "build", "lib*"))
