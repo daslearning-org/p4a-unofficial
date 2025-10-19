@@ -977,7 +977,7 @@ class PythonRecipe(Recipe):
         self.patch_shebangs(self._host_recipe.local_bin, self.real_hostpython_location)
         env["PATH"] = self._host_recipe.local_bin + ":" + self._host_recipe.site_bin + ":" + env["PATH"]
 
-        host_env = self.get_hostrecipe_env()
+        host_env = self.get_hostrecipe_env(arch)
         env['PYTHONPATH'] = host_env["PYTHONPATH"]
 
         if not self.call_hostpython_via_targetpython:
@@ -1347,6 +1347,10 @@ class MesonRecipe(PyProjectRecipe):
     meson_version = "1.4.0"
     ninja_version = "1.11.1.1"
 
+    skip_python = False
+    '''If true, skips all Python build and installation steps.
+    Useful for Meson projects written purely in C/C++ without Python bindings.'''
+
     def sanitize_flags(self, *flag_strings):
         return " ".join(flag_strings).strip().split(" ")
 
@@ -1364,6 +1368,7 @@ class MesonRecipe(PyProjectRecipe):
                 "cpp_args": self.sanitize_flags(env["CXXFLAGS"], env["CPPFLAGS"]),
                 "c_link_args": self.sanitize_flags(env["LDFLAGS"]),
                 "cpp_link_args": self.sanitize_flags(env["LDFLAGS"]),
+                "fortran_link_args": self.sanitize_flags(env["LDFLAGS"]),
             },
             "properties": {
                 "needs_exe_wrapper": True,
@@ -1428,7 +1433,8 @@ class MesonRecipe(PyProjectRecipe):
         ]:
             if dep not in self.hostpython_prerequisites:
                 self.hostpython_prerequisites.append(dep)
-        super().build_arch(arch)
+        if not self.skip_python:
+            super().build_arch(arch)
 
 
 class RustCompiledComponentsRecipe(PyProjectRecipe):
