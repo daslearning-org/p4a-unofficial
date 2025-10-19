@@ -1033,7 +1033,7 @@ class PythonRecipe(Recipe):
             else:
                 warning("`PythonRecipe.install_python_package` called without `setup.py` file!")
 
-    def get_hostrecipe_env(self): #, arch=None
+    def get_hostrecipe_env(self, arch=None):
         env = environ.copy()
         _python_path = self._host_recipe.get_path_to_python()
         libdir = glob.glob(join(_python_path, "build", "lib*"))
@@ -1076,7 +1076,7 @@ class PythonRecipe(Recipe):
         if force_upgrade:
             pip_options.append("--upgrade")
         # Use system's pip
-        pip_env = self.get_hostrecipe_env()
+        pip_env = self.get_hostrecipe_env("dummy-arch")
         pip_env["HOME"] = "/tmp"
         shprint(sh.Command(self.real_hostpython_location), "-m", "pip", *pip_options, _env=pip_env)
 
