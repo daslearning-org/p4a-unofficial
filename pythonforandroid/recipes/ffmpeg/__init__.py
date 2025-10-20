@@ -7,8 +7,8 @@ class FFMpegRecipe(Recipe):
     version = 'n6.1.2'
     # Moved to github.com instead of ffmpeg.org to improve download speed
     url = 'https://github.com/FFmpeg/FFmpeg/archive/{version}.zip'
-    depends = ['sdl2']  # Need this to build correct recipe order
-    opts_depends = ['openssl', 'ffpyplayer_codecs', 'av_codecs']
+    depends = ['sdl2', 'av_codecs']  # Need this to build correct recipe order
+    opts_depends = ['openssl', 'ffpyplayer_codecs']
     patches = ['patches/configure.patch']
 
     def should_build(self, arch):
