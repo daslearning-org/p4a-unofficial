@@ -34,6 +34,9 @@ class PillowRecipe(PyProjectRecipe):
     def get_recipe_env(self, arch, **kwargs):
         env = super().get_recipe_env(arch, **kwargs)
 
+        # Add math library linkage
+        env["LDFLAGS"] = env.get("LDFLAGS", "") + " -lm"
+
         jpeg = self.get_recipe('jpeg', self.ctx)
         jpeg_inc_dir = jpeg_lib_dir = jpeg.get_build_dir(arch.arch)
         env["JPEG_ROOT"] = "{}:{}".format(jpeg_lib_dir, jpeg_inc_dir)
