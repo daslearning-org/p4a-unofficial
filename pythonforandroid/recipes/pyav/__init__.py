@@ -25,10 +25,6 @@ class PyAVRecipe(CythonRecipe):
         include_dir = os.path.join(build_dir, "include")
         setup_py_path = os.path.join(build_dir, "setup.py")
 
-        # Copy all from include -> av/
-        #info("Copying PyAV packages from {} to {}".format(include_dir, av_pkg_dir))
-        #shutil.copytree(include_dir, av_pkg_dir, dirs_exist_ok=True)
-
         # Patch dictionary.pyx for str -> bytes coercion
         dict_pyx_path = os.path.join(av_pkg_dir, 'dictionary.pyx')
         if os.path.exists(dict_pyx_path):
