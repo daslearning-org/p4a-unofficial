@@ -476,6 +476,9 @@ main.py that loads it.''')
 
         foreground = 'foreground' in options
         sticky = 'sticky' in options
+        service_type = 'foregroundServiceType' in options
+        if service_type:
+            print("Service type was given")
 
         service_names.append(name)
         service_target_path =\
