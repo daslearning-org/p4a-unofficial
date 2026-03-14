@@ -99,9 +99,12 @@
         <service android:name="{{ name }}" />
         {% endfor %}
 
+        {{ args.extra_manifest_application_element }}
+
     {% for a in args.add_activity  %}
     <activity android:name="{{ a }}"></activity>
     {% endfor %}
+
     </application>
 
 </manifest>

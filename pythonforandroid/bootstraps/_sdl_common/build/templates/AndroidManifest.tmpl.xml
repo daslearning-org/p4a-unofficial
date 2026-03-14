@@ -123,6 +123,8 @@
         <service android:name="{{ name }}" />
         {% endfor %}
 
+        {{ args.extra_manifest_application_element }}
+
         {% if args.billing_pubkey %}
         <service android:name="org.kivy.android.billing.BillingReceiver"
                  android:process=":pythonbilling" />
