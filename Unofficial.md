@@ -4,7 +4,8 @@ This repo is a fork of original P4A project. We may have some new thigs or custo
 ## Added Recipes
 We have creared some new recipies which might not be present in original repo.
 
-1. [OnnxRunTime](./pythonforandroid/recipes/onnxruntime/)
+1. [OnnxRuntime](./pythonforandroid/recipes/onnxruntime/)
+2. [tokenizers](./pythonforandroid/recipes/tokenizers/) (it does not include the huggingface related modules.)
 
 
 ## Android XML & Arg part
