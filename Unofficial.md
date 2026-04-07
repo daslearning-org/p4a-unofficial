@@ -14,7 +14,7 @@ We have creared some new recipies which might not be present in original repo.
 1. App Orientation Path: `pythonforandroid/bootstraps/_sdl_common/build/templates/AndroidManifest.tmpl.xml`
 
 ```xml
-android:screenOrientation="fullSensor"
+android:screenOrientation="fullSensor" <!-- or "fullUser" -->
 ```
 
 ## Customized Arguments
