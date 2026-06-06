@@ -5,7 +5,7 @@ from os.path import join
 class FFPyPlayerRecipe(PyProjectRecipe):
     version = 'v4.5.1'
     url = 'https://github.com/matham/ffpyplayer/archive/{version}.zip'
-    depends = ['python3', 'sdl2', 'ffmpeg']
+    depends = ['python3', 'sdl2', 'ffmpeg-v6']
     patches = ["setup.py.patch"]
     opt_depends = ['openssl', 'ffpyplayer_codecs']
 
