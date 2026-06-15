@@ -8,7 +8,7 @@ class OnnxRuntimeRecipe(PyProjectRecipe):
     version = "1.22.1"
     url = "https://github.com/microsoft/onnxruntime/archive/refs/tags/v{version}.tar.gz"
 
-    depends = ["setuptools", "wheel", "numpy", "protobuf", "pybind11"]
+    depends = ["setuptools", "wheel", "numpy", "protobuf", "pybind11_new"]
     patches = [
         'patches/onnx_numpy.patch',
         #'patches/mlasi_bfloat.patch',
@@ -43,7 +43,7 @@ class OnnxRuntimeRecipe(PyProjectRecipe):
         print(f"Python build dir: {py_build_dir}")
         #python_include_dir = join(py_build_dir, 'Include') # from build dir
         python_include_dir = self.ctx.python_recipe.include_root(arch.arch)
-        pybind11_recipe = self.get_recipe('pybind11', self.ctx)
+        pybind11_recipe = self.get_recipe('pybind11_new', self.ctx)
         pybind11_include_dir = pybind11_recipe.get_include_dir(arch)
         print(f"Python include dir: {python_include_dir}")
         print(f"Does Python.h exist? {exists(join(python_include_dir, 'Python.h'))}")
