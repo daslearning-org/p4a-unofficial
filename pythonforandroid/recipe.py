@@ -1291,8 +1291,8 @@ class PyProjectRecipe(PythonRecipe):
 
         return False
 
-    def get_recipe_env(self, arch, **kwargs):
-        env = super().get_recipe_env(arch, **kwargs)
+    def get_recipe_env(self, arch, with_flags_in_cc=True):
+        env = super().get_recipe_env(arch, with_flags_in_cc)
         build_dir = self.get_build_dir(arch)
         ensure_dir(build_dir)
         build_opts = join(build_dir, "build-opts.cfg")
