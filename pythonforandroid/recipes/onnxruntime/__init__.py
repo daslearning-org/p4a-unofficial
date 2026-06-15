@@ -73,7 +73,6 @@ class OnnxRuntimeRecipe(PyProjectRecipe):
             "-Donnxruntime_ENABLE_PYTHON=ON",
             "-Donnxruntime_BUILD_SHARED_LIB=OFF",
             "-DPYBIND11_USE_CROSSCOMPILING=TRUE",
-            "-Donnxruntime_USE_NNAPI_BUILTIN=ON",
             "-Donnxruntime_USE_XNNPACK=ON",
             f"-DONNX_CUSTOM_PROTOC_EXECUTABLE=/usr/bin/protoc",
             f"-DPython_NumPy_INCLUDE_DIR={python_include_numpy}",
