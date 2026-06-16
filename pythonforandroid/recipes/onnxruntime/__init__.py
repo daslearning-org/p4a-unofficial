@@ -38,6 +38,7 @@ class OnnxRuntimeRecipe(PyProjectRecipe):
         build_dir = self.get_build_dir(arch.arch)
         print(f"Build dir: {build_dir}")
         cmake_dir = join(build_dir, "cmake")
+        print(f"cmake dir: {cmake_dir}")
         capi_dir = join(build_dir, "onnxruntime", "capi")
         dist_dir = join(build_dir, "dist")
         py_build_dir = Recipe.get_recipe("hostpython3", self.ctx).get_build_dir(arch.arch)
@@ -74,8 +75,8 @@ class OnnxRuntimeRecipe(PyProjectRecipe):
             "-Donnxruntime_ENABLE_PYTHON=ON",
             "-Donnxruntime_BUILD_SHARED_LIB=OFF",
             "-DPYBIND11_USE_CROSSCOMPILING=TRUE",
-            "-Donnxruntime_USE_XNNPACK=ON",
-            "-Donnxruntime_ENABLE_WERROR=OFF",
+            "-Donnxruntime_USE_XNNPACK=OFF",
+            "-Donnxruntime_ENABLE_INSTALL=OFF",
             f"-DONNX_CUSTOM_PROTOC_EXECUTABLE=/usr/bin/protoc",
             f"-DPython_NumPy_INCLUDE_DIR={python_include_numpy}",
             f"-DPython_EXECUTABLE={python_path}",
