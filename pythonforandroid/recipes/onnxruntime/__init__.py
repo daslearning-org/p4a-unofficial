@@ -5,13 +5,14 @@ import sh, sys
 from multiprocessing import cpu_count
 
 class OnnxRuntimeRecipe(PyProjectRecipe):
-    version = "1.22.1"
+    version = "1.25.1" # "1.22.1"
     url = "https://github.com/microsoft/onnxruntime/archive/refs/tags/v{version}.tar.gz"
 
     depends = ["setuptools", "wheel", "numpy", "protobuf", "pybind11_new"]
     patches = [
-        'patches/onnx_numpy.patch',
+        #'patches/onnx_numpy.patch',
         #'patches/mlasi_bfloat.patch',
+        "patches/onnx_numpy1251.patch"
     ]
     build_in_src = True
 
