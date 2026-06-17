@@ -16,7 +16,7 @@ class OnnxRuntimeRecipe(PyProjectRecipe):
     ]
     build_in_src = True
 
-    def get_recipe_env(self, arch=None):
+    def get_recipe_env(self, arch=None, **kwargs):
         env = super().get_recipe_env(arch)
         python_include_dir = self.ctx.python_recipe.include_root(arch.arch)
         print(f"Python include dir: {python_include_dir}")
@@ -89,8 +89,9 @@ class OnnxRuntimeRecipe(PyProjectRecipe):
 
         with current_directory(build_dir):
             # Build the cmake part before building the wheel
+            jobs = min(4, cpu_count())
             shprint(sh.Command("cmake"), *cmake_args, _env=env)
-            shprint(sh.make, '-j' + str(cpu_count()), _env=env)
+            shprint(sh.make, '-j' + str(jobs), _env=env)
 
         # Build & Install wheel into target python site-packages
         super().build_arch(arch)

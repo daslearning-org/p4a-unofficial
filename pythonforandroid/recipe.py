@@ -1291,8 +1291,8 @@ class PyProjectRecipe(PythonRecipe):
 
         return False
 
-    def get_recipe_env(self, arch, with_flags_in_cc=True):
-        env = super().get_recipe_env(arch, with_flags_in_cc)
+    def get_recipe_env(self, arch, **kwargs):
+        env = super().get_recipe_env(arch, **kwargs)
         build_dir = self.get_build_dir(arch)
         ensure_dir(build_dir)
         build_opts = join(build_dir, "build-opts.cfg")
@@ -1381,7 +1381,7 @@ class PyProjectRecipe(PythonRecipe):
             packages=["build[virtualenv]", "pip", "setuptools", "patchelf"] + self.hostpython_prerequisites
         )
 
-        env = self.get_recipe_env(arch)
+        env = self.get_recipe_env(arch, with_flags_in_cc=True)
         # make build dir separately
         sub_build_dir = join(build_dir, "p4a_android_build")
         ensure_dir(sub_build_dir)
