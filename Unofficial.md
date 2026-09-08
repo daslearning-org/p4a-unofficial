@@ -1,6 +1,6 @@
 # Unofficial Usage
 This repo is a fork of original P4A project. We may have some new thigs or customization as per our need.
-> Note: You need to check other branches like `numpy2` to get the recipes or the modifications, not putting into `develop` to keep it clean.
+> Note: You need to check other branches like `dasfix` to get the recipes or the modifications, not putting into `develop` to keep it clean.
 
 ## Added Recipes
 We have creared some new recipies which might not be present in original repo.
