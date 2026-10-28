@@ -172,7 +172,7 @@ public class PythonService extends Service implements Runnable {
             builder.setSmallIcon(smallIconId);
 
             String packageName = context.getPackageName();
-            String serviceClassName = context.getClass().getName();
+            String serviceClassName = this.getClass().getName(); //context.getClass().getName();
 
             // Create an Intent for the Stop button.
             Intent stopIntent = new Intent();
