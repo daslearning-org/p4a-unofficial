@@ -170,6 +170,34 @@ public class PythonService extends Service implements Runnable {
             builder.setContentText(contentText);
             builder.setContentIntent(pIntent);
             builder.setSmallIcon(smallIconId);
+
+            String packageName = context.getPackageName();
+            String serviceClassName = context.getClass().getName();
+
+            // Create an Intent for the Stop button.
+            Intent stopIntent = new Intent();
+            stopIntent.setClassName(
+                packageName,
+                packageName + ".StopServiceReceiver"
+            );
+            stopIntent.setAction(packageName + ".STOP_SERVICE");
+            stopIntent.putExtra("service_class", serviceClassName);
+
+            PendingIntent stopPendingIntent = PendingIntent.getBroadcast(
+                context,
+                1001,
+                stopIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+                    | PendingIntent.FLAG_IMMUTABLE
+            );
+
+            // Add the Stop button to the notification.
+            builder.addAction(
+                android.R.drawable.ic_media_pause,
+                "Stop",
+                stopPendingIntent
+            );
+
             notification = builder.build();
         }
         startForeground(getServiceId(), notification);

@@ -5,7 +5,7 @@ from pythonforandroid.recipe import PyProjectRecipe
 class PyAVRecipe(PyProjectRecipe):
 
     name = "av"
-    version = "18.1.0" #"17.0.0"
+    version = "18.1.0"
     url = "https://github.com/PyAV-Org/PyAV/archive/v{version}.zip"
     patches = ["libs.patch"]
     depends = ["python3", "ffmpeg", "av_codecs", "openssl"]
